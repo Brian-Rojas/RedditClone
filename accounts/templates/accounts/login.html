@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Welcome back, login below!</h1>
+
+    {% if error %}
+      <h3>{{ error }}</h3>
+    {% endif %}
+    <br>
+    <form class="" action="{% url 'accounts:login' %}" method="post">
+      {% csrf_token %}
+
+      {% if request.GET.next %}
+      <input type="hidden" name="next" value="{{ request.GET.next }}" />
+      {% endif %}
+
+      Username:
+      <br>
+      <input type="text" name="username" />
+      <br>
+      Password:
+      <br>
+      <input type="password" name="password" />
+      <br>
+      <button type="submit" name="submit">Login</button>
+    </form>
+
+  </body>
+</html>
