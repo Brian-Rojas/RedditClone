@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from .models import Post
 from django.utils import timezone
+from django.http import HttpResponse
 
 @login_required
 def create(request):
@@ -14,5 +15,16 @@ def create(request):
             post.pub_date = timezone.datetime.now()
             post.author = request.user
             post.save()
+        else:
+            return render(
+                request,
+                'posts/create.html',
+                {'error': 'Both fields are required'}
+            )
+        return redirect(request, 'posts/home.html')
     else:
         return render(request, 'posts/create.html')
+
+
+def home(request):
+    return render(request, 'posts/home.html')
