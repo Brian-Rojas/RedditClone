@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from .models import Post
@@ -21,7 +21,7 @@ def create(request):
                 'posts/create.html',
                 {'error': 'Both fields are required'}
             )
-        return redirect(request, 'posts/home.html')
+        return render(request, 'posts/home.html')
     else:
         return render(request, 'posts/create.html')
 
