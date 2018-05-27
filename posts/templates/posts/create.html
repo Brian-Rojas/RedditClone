@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,8 +26,11 @@
       <br>
       <input type="text" name="url" />
       <br>
-      <button type="submit" name="submit">Post</button>
+      <br>
+      <button class="btn btn-primary" type="submit" name="submit">Post</button>
     </form>
 
   </body>
 </html>
+
+{% endblock %}

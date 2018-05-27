@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 
 def signup(request):
     if request.method == 'POST':
@@ -43,8 +43,15 @@ def login(request):
             auth_login(request, user)
             if 'next' in request.POST:
                 return redirect(request.POST['next'])
-            return HttpResponse('You loged in as {}, welcome!!'.format(user.username))
+            return redirect('home')
         else:
             return render(request, 'accounts/login.html', {'error':'login failed'})
     else:
         return render(request, 'accounts/login.html')
+
+def logoutView(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('home')
+    else:
+        return redirect('home')
